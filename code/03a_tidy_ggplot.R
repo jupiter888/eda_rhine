@@ -6,21 +6,7 @@ library(dplyr)
 #Navigator task 1
 #create a data.table from runoff_stations containing: sname, area, altitude. 
 #Then, transform to tidy format.
-
-#********ave runoff per station, graphed *********************************
-runoff_day
-runoff_stations
-#the sname is a vector, so no need to type this. 
-station_names <- split(runoff_stations[, .(sname)], by=snames)
-station_names
-
-
-
-
-mu
-
-#********************************************************************
-
+getwd()
 runoff_stations <- readRDS('./data/runoff_stations_raw.rds')
 runos <- runoff_stations[, .(sname, area, altitude)]
 #this is the data table
@@ -63,7 +49,8 @@ runoff_stations
 # 1. Create a plot
 # The plot is displayed on the screen
 # 2. Save the plot to a pdf
-ggsave("03a_tidy_ggplot1.pdf")
+# ggsave("03a_tidy_ggplot1.pdf")
 
-#explorers questions
+#explorers questions in another file
+
 
