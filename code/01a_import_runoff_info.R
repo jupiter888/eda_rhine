@@ -13,4 +13,5 @@ runoff_stations[, id := factor(id)]
 runoff_stations[, lat := round(lat, 3)]
 runoff_stations[, lon := round(lon, 3)]
 runoff_stations[, altitude := round(altitude, 0)]
+#rds formatted files are faster to read and smaller
 saveRDS(runoff_stations, './data/runoff_stations_raw.rds')

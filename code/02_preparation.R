@@ -63,6 +63,8 @@ ggplot(data = rees_runoff_day, aes(x = date, y = value)) +
   geom_line() + 
   geom_point() +
   theme_bw()
+#verify results
+rees_runoff_day
 
 station_time <- runoff_day[, .(start = min(year(date)), 
                                end = max(year(date))), 

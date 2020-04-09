@@ -1,3 +1,7 @@
+library(data.table)
+library(ggplot2)
+library(tidyr)#not sure which of this one or dplyr is parent to the other 
+library(viridis) #for color gradients
 library(dplyr)
 #explorers questions day 3
 #1. area=Km2 & runoff=m3/s
