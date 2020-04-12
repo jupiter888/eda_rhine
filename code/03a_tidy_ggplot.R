@@ -11,6 +11,7 @@ runoff_stations <- readRDS('./data/runoff_stations_raw.rds')
 runos <- runoff_stations[, .(sname, area, altitude)]
 #this is the data table
 runos 
+tail(runos)
 #converted to tibble(tibble is another name for tidy format)
 #Be careful to use as.data.frame() and not as_data_frame(), which is alias for as_tibble().
 as_tibble(runos)
@@ -38,11 +39,13 @@ la_lo <- ggplot(lati_longi, aes(x=lon, y=lat)) +
   theme(panel.border = element_rect(colour = "black", fill=NA, size=1))
 plot(la_lo)
 ggsave("03a_tidy_ggplot2")
-#errors on first attempt: label gradeint, labels are vals not names,thinner border
+#
+#errors on first attempt: label gradient, labels are vals not names,thinner border
 #nav3 Complete~
 
 #Nav4 Create a graph comparing the periods of available data at each station (assume that there are no missing values).
 runoff_stations
+runoff_day
 #nav4 incomplete- not sure what is required to produce results
 
 #save the plots!!!!!! 

@@ -24,7 +24,7 @@ station_id <- substr(fnames[file_count], 1, id_length)
 temp_dt <- cbind(id = factor(station_id),temp_dt)
 temp_dt
 #perfect
-#next we will aff the station abbrev name as another column, by merging temp_dt with id_sname and matching the values in 'id' collumn 
+#next we will add the station shortname by merging temp_dt with id_sname and matching the values in 'id' collumn 
 temp_dt <- id_sname[temp_dt, on = 'id']
 #next we attachtemp_dt to the end of runoff_day_raw
 runoff_day_raw <- rbind(runoff_day_raw, temp_dt)
