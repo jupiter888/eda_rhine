@@ -15,8 +15,11 @@ runoff_day_raw <- data.table()
 id_sname <- runoff_stations[, .(id, sname)]
 #create a loop that reads each text files, and
 ##appends it on the bottom of the previous
-#create a variable to represent loop iteration
+#create a variable to represent loop iteration(file_count)
 file_count <- 1
+#loop it! ERRROR DISCOVERED!!!!!!!!!!!!!!!!!!!!!!!!!!
+for(file_count in 1:n_station){
+
 #temp data.table needed for the loop
 temp_dt <- fread(paste0(raw_path, fnames[file_count]))
 #next we will extract station id from the file name and add it as a new collumn to temp-dt
@@ -28,7 +31,9 @@ temp_dt
 temp_dt <- id_sname[temp_dt, on = 'id']
 #next we attachtemp_dt to the end of runoff_day_raw
 runoff_day_raw <- rbind(runoff_day_raw, temp_dt)
-#end loop
+}
+#end loop -- I MUST HAVE MISSED THIS DURING THE ADVENTURE
+
 #now the loop is over, and all our discharge data are merged in a single data.table object,runoff_day_raw
 #before saving we edit a little, by removing the time col(unnecessary)
 runoff_day_raw[, 'hh:mm' := NULL]
