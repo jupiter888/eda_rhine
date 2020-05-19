@@ -1,4 +1,3 @@
-
 library(data.table)
 library(ggplot2)
 #finding means for each station from the runoff_day data.table, and ggplot this
@@ -44,7 +43,6 @@ missing_values
 
 
 #it would be more informative if we transformed the absolute numbers to ratios of the total missing values per station.
-
 sample_size <- runoff_day[, .(size = .N), by = sname]
 runoff_stations <- runoff_stations[sample_size, on = 'sname']
 runoff_stations <- missing_values[runoff_stations, on = 'sname']
@@ -70,13 +68,7 @@ station_time <- runoff_day[, .(start = min(year(date)),
                                end = max(year(date))), 
                            by = sname]
 table(station_time$end)
-#^^^this is what was supposed to show up:
-### 1982 1988 1995 2016 2017 
-##    1    1    1   16    1
-
-#only this showed:
-##2016
-###1
+#error discovered, solved!!!!!
 
 #Most of the records appear to reach 2016. Since we are interested in comparing climatic periods, we would need at least data from two consecutive climatic periods.1717 A climatic period has usually a 30-year length. We can add the corresponding information in runoff_stations and then keep only the records within these limits.
 max_year <- 2016
