@@ -8,7 +8,7 @@ library(dplyr)
 #Then, transform to tidy format.
 getwd()
 runoff_stations <- readRDS('./data/runoff_stations_raw.rds') #this is the beginning of the errors 
-
+#################################################################################less errors stop mark##########################
 runos <- runoff_stations[, .(sname, area, altitude)]
 #this is the data table
 runos 
