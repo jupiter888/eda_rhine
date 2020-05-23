@@ -40,21 +40,17 @@ la_lo <- ggplot(lati_longi, aes(x=lon, y=lat)) +
   theme(panel.border = element_rect(colour = "black", fill=NA, size=1))
 plot(la_lo)
 ggsave("03a_tidy_ggplot2")
-#
-#errors on first attempt: label gradient, labels are vals not names,thinner border
 #nav3 Complete~
 
 #Nav4 Create a graph comparing the periods of available data at each station (assume that there are no missing values).
 runoff_stations
 runoff_day
-#nav4 incomplete- not sure what is required to produce results
-
-#save the plots!!!!!! 
-# 1. Create a plot
-# The plot is displayed on the screen
-# 2. Save the plot to a pdf
-# ggsave("03a_tidy_ggplot1.pdf")
-
+#ggplot the station names with dates
+stations_periods <- ggplot(data=runoff_day, aes(x=sname, y=date,color=sname))
+stations_periods+
+  geom_boxplot()+
+  labs(subtitle="Graph for nav4", x="Station",y="Time period")
+#nav4 complete 23/05  
 #explorers questions in another file
 
 
