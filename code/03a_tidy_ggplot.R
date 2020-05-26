@@ -46,10 +46,11 @@ ggsave("03a_tidy_ggplot2")
 runoff_stations
 runoff_day
 #ggplot the station names with dates
-stations_periods <- ggplot(data=runoff_day, aes(x=sname, y=date,color=sname))
-stations_periods+
+stations_periods <- ggplot(data=runoff_day, aes(x=sname, y=date,color=sname))+
   geom_boxplot()+
   labs(subtitle="Graph for nav4", x="Station",y="Time period")
+plot(stations_periods)
+#ggsave("03a_tidy_ggplot4")
 #nav4 complete 23/05  
 #explorers questions in another file
 
