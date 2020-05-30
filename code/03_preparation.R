@@ -1,7 +1,5 @@
-library(mapview) 
-library(sf) 
 source('./code/source_code.R')
-# Load data and set global variables and ---------------------------
+# Load data and set global variables  ---------------------------
 
 colset_4 <-  c("#D35C37", "#BF9A77", "#D6C6B9", "#97B8C2")
 

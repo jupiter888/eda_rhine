@@ -8,4 +8,9 @@
 #nth value of the set the mean is taken from. 
 
 #3notice something strange w loc of the stations LOBI and REES, possible explanation
- 
+#Yes I can see two observations. These stations have the most pronounced valley signifying end of hydrological cycle in the 10th month of the year. Also, I see varying altitude difference with the altitude slightly higher, yes closer to the sea yet higher. This is very peculiar given that Netherlands is under sea-level primarily. 
+
+#4Which months, seasons, years with the highest/lowest runoff at ea loc
+
+
+
