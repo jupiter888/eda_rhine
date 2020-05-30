@@ -20,22 +20,22 @@ source('./code/source_code.R')
 mo_min <- runoff_month[, min(value), by=sname]
 mo_max <- runoff_month[, max(value), by=sname]
 #combine these
-months_merge <- merge(mo_max, mo_min, by='sname')
-colnames(months_merge) <- c('sname', 'max', 'min')
+months_merge <- merge(mo_min, mo_max, by='sname')
+#attn. to order consistency 
+colnames(months_merge) <- c('sname', 'min', 'max')
 #combine with runoff_month
 mo_maxmins_merge <- merge(runoff_month, months_merge, by='sname')
 #min/max values differentiated respectively
-month_minimums <- mo_maxmins_merge[runoff_month$value==mo_maxmins_merge$min]
-month_maximums <- mo_maxmins_merge[runoff_month$value==mo_maxmins_merge$max]
-
-
-ggplot(data=months_merge, aes(x=sname, y=max, label=year))+
-  geom_point()
-  geom_text(aes(label=year),hjust=0, vjust=0)
-  #errors---------------------------------------------------
-  
-
-
+month_minimums <- mo_maxmins_merge[mo_maxmins_merge$value == mo_maxmins_merge$min]
+month_maximums <- mo_maxmins_merge[mo_maxmins_merge$value == mo_maxmins_merge$max]
+month_minimums
+month_maximums
+#plotting 
+ggplot(data=month_minimums, aes(x=sname, y=min, label=year))+
+  geom_point(aes(colour=sname))+
+  coord_flip()+
+  labs(title="Month mins")            
+  #need to factor months into design
 
 
 
