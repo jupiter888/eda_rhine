@@ -40,4 +40,14 @@ ggplot(runoff_day_upd, aes(x=season, y=date, fill=season))+
   labs(title="Navigator Q2 Ch.5 ")
 #-------------------------------------------------------------------
 #NavQ3
-
+dt <- runoff_summary[, .(sname, area, category)]
+runoff_day_2010 <- runoff_day[year <= 2010, .(sname, mean_day=round(mean(value)), 0), by=sname]
+to_plot <- runoff_day_2010[dt, on='sname']
+ggplot(to_plot, aes(x=mean_day, y=area)) +
+  geom_point(aes(col = category), cex = 3) +
+  geom_smooth(method = 'loess', formula = y ~ x, se=0) +
+  xlab(label = "Area") +
+  ylab(label = "Runoff (M3/s)") 
+  theme_bw()
+#Not seeing any obvious changes after trying several times
+  

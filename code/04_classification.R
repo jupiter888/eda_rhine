@@ -1,15 +1,5 @@
 source('./code/source_code.R')
 #library errors still occuring
-runoff_summary <- readRDS('data/runoff_summary.rds')
-runoff_stats <- readRDS('data/runoff_stats.rds')
-runoff_month <- readRDS('data/runoff_month.rds')
-runoff_summer <- readRDS('data/runoff_summer.rds')
-runoff_winter <- readRDS('data/runoff_winter.rds')
-runoff_year <- readRDS('data/runoff_year.rds')
-
-colset_4 <-  c("#D35C37", "#BF9A77", "#D6C6B9", "#97B8C2")
-theme_set(theme_bw())
-
 dt <- runoff_summary[, .(sname, area)]
 for_cor <- runoff_stats[dt, on = 'sname']
 cor(for_cor$mean_day, for_cor$area)
