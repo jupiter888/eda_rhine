@@ -1,7 +1,19 @@
 library(data.table)
 library(ggplot2)
+#install.packages("mapview")
 library(mapview) 
+#install.packages("sf")
 library(sf) 
+#ch4.EXPL#4Q---------------
+#install.packages("ggridges")
+library(ggridges)
+#install.packages("viridis")
+library(viridis)
+#install.packages("hrbrthemes")
+library(hrbrthemes) 
+#install.packages("tidyr")
+library(tidyr)
+#--------------------------
 
 #Datasets
 runoff_summary <- readRDS('data/runoff_summary.rds')
