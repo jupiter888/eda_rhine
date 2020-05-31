@@ -6,7 +6,7 @@ library(mapview)
 library(sf) 
 #ch4.EXPL#4Q---------------
 #install.packages("ggridges")
-library(ggridges)
+#library(ggridges)
 #install.packages("viridis")
 library(viridis)
 #install.packages("hrbrthemes")
