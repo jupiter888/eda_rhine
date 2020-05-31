@@ -1,5 +1,5 @@
 source('./code/source_code.R')
-#library errors still oc
+#library errors still occuring
 
 runoff_summary <- readRDS('data/runoff_summary.rds')
 runoff_summary_key <- readRDS('data/runoff_summary_key.rds')
