@@ -32,6 +32,3 @@ runoff_year_key <- readRDS('data/runoff_year_key.rds')
 
 colset_4 <-  c("#D35C37", "#BF9A77", "#D6C6B9", "#97B8C2")
 theme_set(theme_bw())
-#Variables
-colset_4 <-  c("#D35C37", "#BF9A77", "#D6C6B9", "#97B8C2")
-theme_set(theme_bw())
