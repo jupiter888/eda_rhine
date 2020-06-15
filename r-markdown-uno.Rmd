@@ -2,7 +2,7 @@
 title: 'R̼͖͑̓̚͜M̡͎̈́͜͝a̼͍̞͑̕̚r̡͓͙͒͆͆k̢̙͔̾̔d̢̻͓̾̾o̡̫̻͊͋̿w͍͔̻̿̔̔ǹ͔͉̺̐́͊      Ë͚̠͚́̓͋X̦͎͎̓͒P͓̺͒͜͠͝L̡̦̟͊͘͠O̫͎̙̓͋̈́R̢̙̾̾͠A̦͇̓̾̕͜T͚͔͍̓̾O͎̳͙͐̔͘R̙̝͉̓̓Ÿ̦̻̻́͛̕
   D̙͎͚̈́̀A͖̠͌͊T̢̡̫̓͐͠A͓͉͕͋͋̀ A̪̝̔̿͠N̪̞͐͛͘A͚͇̼̒̈́͠L͍͚͓̾̓͝Y̦̼͎͑͐̓S̻I͖͍͖͐̔̚S͉͓͕͙̪̳͋̓́͛ '
 author: '                 D͖̳̓̓͝a̪͉͔̓͆͝n͓̘͕͌͆͝ḯ͕͎͝͝e̿l̳͇̳̈́́͝ T̻͕͍̈́͠͝r̦͚̝̕̚͝a̡̝͎̔̐͝c̔͊y̘̺̝͆̈́͠'
-date: "6/11/2020"
+date: "11/06/2020"
 output: html_document
 ---
 ```{r setup, include=FALSE}
@@ -15,7 +15,7 @@ library(rmarkdown)
 
 <h2>Exploring the Rhine River runoff stations</h2>
 <h3>We set out on a mission to prove the hypothesis made by Middelkoop</h3>
-<span style="color: darkgoldenrod;"> “Higher winter discharge as a result of intensified snow-melt and increased winter precipitation, and lower summer discharge due to the reduced winter snow storage and an increase of evapotranspiration.”</span>
+<span style="color:Teal;"> “Higher winter discharge as a result of intensified snow-melt and increased winter precipitation, and lower summer discharge due to the reduced winter snow storage and an increase of evapotranspiration.”</span>
 ```{r}
 runoff_stations <- readRDS('data/runoff_stations_raw.rds') 
 runos <- runoff_stations[, .(sname, area, altitude)]
@@ -47,7 +47,7 @@ plot(stations_periods)
 ```
 <br>
 <br>
-<h2>We see in plots we created that the runoff at the Rhine River stations has definitely changed over the last few decades in an increased rate</h2>
+<h3 style="color:darkgray;">We see in plots we created that the runoff at the Rhine River stations has definitely changed over the last few decades in an increased rate</h3>
 ```{r}
 runoff_day <- readRDS('./data/runoff_day.rds')
 runoff_year <- runoff_day[, .(value = mean(value)), by = .(year, sname)]
@@ -58,10 +58,10 @@ ggplot(runoff_year[year > 1980], aes(x = year, y = value)) +
   facet_wrap(~sname, scales = 'free') +
   theme_minimal()
 ```
-<p style="color:orange;">We used abbreviated names for the stations</p>
+<p style="color:lemonchiffon;">We used abbreviated names for the stations</p>
 <br>
 <br>
-<h2 style="color:white;">While exploring the data after preparation, we were able to present plots that helped better understand the data such as this plot, which shows the longitude and latitude, with altitude gradient for the stations points:</h2>
+<h2 style="color:mediumturquoise;">While exploring the data after preparation, we were able to present plots that helped better understand the data such as this plot, which shows the longitude and latitude, with altitude gradient for the stations points:</h2>
 ```{r}
 runoff_stations <- readRDS('./data/runoff_stations_raw.rds')
 lati_longi <- runoff_stations[, .(lat,lon,altitude,sname)]
@@ -75,26 +75,22 @@ plot(la_lo)
 ```
 <br>
 <br>
-<h1 style="color:slateblue;">The following plot was a great representation of the data, and helped draw the conclusion that Middelkoop had made an accurate hypothesis</h1>
+<h3 style="color:slateblue;">The following plot was a great representation of the data, and helped draw a powerful conclusion</h3> 
 ```{r}
 runoff_year <- readRDS('data/runoff_year.rds')
-key_stations <- c('DOMA', 'BASR', 'KOEL')
-runoff_year_key <- runoff_year[sname %in% key_stations]
-ggplot(runoff_year_key[year > 1950], aes(x = year, y = value_norm, col = sname)) +
-  geom_line() +
-  geom_point() + 
-  scale_color_manual(values = colset_4[c(1, 2, 4)]) +
-  xlab(label = "Year") +
-  ylab(label = "Runoff (m3/s)")
+merged <- runoff_summary[, .(sname, runoff_class)]
+plotted_merged <- merge(runoff_month, merged, by='sname')
+ggplot(plotted_merged, aes(x=factor(month), y=value, fill=runoff_class)) +
+  geom_boxplot() +
+  facet_wrap(~sname, scales='free') +
+  labs(subtitle="Stations monthly runoff boxplot")+
+  theme_bw()
 ```
-
-
-
-
-
-## Including Plots
-```{r pressure, echo=FALSE} 
-#echo false so no code is shown in output
-plot(pressure)
-```
+<h1 style="color:Aquamarine;">Middelkoop had made an accurate hypothesis</h1>
+<br>
+<p style="color:pink;">---------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<br>
+<h3 style="color:dodgerblue;">In conclusion, we can see in this presentation through these plots, the winter runoff has increased due to higher winter temperatures, and increased rainfall. The summers do have an increase in evapotranspiration, and we can observe this through the low levels of discharge in that time of the year. Through the manipulation of data with statistical analysis and patience, these figures give clear results that support Middlekoop's hypothesis. May we all recognize the importance of this information, and continue to strive for understanding our planet we call home</h2>
+<br>
+<p style="text-align:right; color:darkslategray;">Exploratory Data Analysis R-Markdown Report by: Daniel Tracy 11/06/2020</p>
 </body>

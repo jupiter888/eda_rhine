@@ -7,7 +7,7 @@ cor(for_cor$mean_day, for_cor$area)
 
 for_cor_mat <- for_cor[, c('mean_day', 'area')]
 cor(for_cor_mat)
-
+library(reshape2)
 runoff_month_mat <- dcast(runoff_month, date~sname)
 runoff_month_cor <- cor(runoff_month_mat[, -1], use = "pairwise.complete.obs")
 to_plot <- melt(runoff_month_cor)
