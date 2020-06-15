@@ -67,7 +67,9 @@ ggplot(data=summer_minimums, aes(x=sname, y=min, label=year))+
 ggplot(data=summer_maximums, aes(x=sname, y=max, label=year))+
   geom_point(aes(colour=year))+
   labs(title="Summer maximums")+
-  scale_color_viridis(option="D")  
+  scale_color_gradient()
+  
+
 #-------------------Summers complete--------------------------
 #winter mins/max by year
 w_min <- runoff_winter[, min(value), by=sname]

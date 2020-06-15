@@ -31,5 +31,5 @@ area_altitude <- runoff_stations[, list(area),by=altitude]
 ggplot(area_altitude, aes(x=altitude, y=area)) +
   theme(panel.border=element_rect(color="pink", fill=NA, size=3)) +
   geom_bar(stat="identity", width=10) 
-ggsave("stations_area_altitude_relation.pdf")
+#ggsave("stations_area_altitude_relation.pdf")
 #Obvserving this plot allows me to see that the higher altitudes catchments have less area, while the lower altitude catchments have much higher area. This logically seems accurate, given that as we get closer to the sea level, there will be much more accumulated water, so the areas are greater to support this.  

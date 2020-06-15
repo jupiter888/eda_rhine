@@ -10,7 +10,7 @@ library(sf)
 #install.packages("viridis")
 library(viridis)
 #install.packages("hrbrthemes")
-library(hrbrthemes) 
+#library(hrbrthemes) 
 #install.packages("tidyr")
 library(tidyr)
 #--------------------------

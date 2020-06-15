@@ -1,34 +1,100 @@
 ---
-title: "r-markdown-first"
-author: "Daniel Tracy"
+title: 'R̼͖͑̓̚͜M̡͎̈́͜͝a̼͍̞͑̕̚r̡͓͙͒͆͆k̢̙͔̾̔d̢̻͓̾̾o̡̫̻͊͋̿w͍͔̻̿̔̔ǹ͔͉̺̐́͊      Ë͚̠͚́̓͋X̦͎͎̓͒P͓̺͒͜͠͝L̡̦̟͊͘͠O̫͎̙̓͋̈́R̢̙̾̾͠A̦͇̓̾̕͜T͚͔͍̓̾O͎̳͙͐̔͘R̙̝͉̓̓Ÿ̦̻̻́͛̕
+  D̙͎͚̈́̀A͖̠͌͊T̢̡̫̓͐͠A͓͉͕͋͋̀ A̪̝̔̿͠N̪̞͐͛͘A͚͇̼̒̈́͠L͍͚͓̾̓͝Y̦̼͎͑͐̓S̻I͖͍͖͐̔̚S͉͓͕͙̪̳͋̓́͛ '
+author: '                 D͖̳̓̓͝a̪͉͔̓͆͝n͓̘͕͌͆͝ḯ͕͎͝͝e̿l̳͇̳̈́́͝ T̻͕͍̈́͠͝r̦͚̝̕̚͝a̡̝͎̔̐͝c̔͊y̘̺̝͆̈́͠'
 date: "6/11/2020"
 output: html_document
 ---
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+source('./code/source_code.R')
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+library(rmarkdown)
 ```
+<body style="background-color:powderblue;">
 
-## R Markdown
+
+<h2>Exploring the Rhine River runoff stations</h2>
+<h3>We set out on a mission to prove the hypothesis made by Middelkoop</h3>
+<span style="color: darkgoldenrod;"> “Higher winter discharge as a result of intensified snow-melt and increased winter precipitation, and lower summer discharge due to the reduced winter snow storage and an increase of evapotranspiration.”</span>
 ```{r}
-#this is a chunk, created by: #command-option-i
-#Chunk output can be customized with knitr options 
+runoff_stations <- readRDS('data/runoff_stations_raw.rds') 
+runos <- runoff_stations[, .(sname, area, altitude)]
+runos 
+``` 
+<i>Discoveries were endless once familiar with the data from the different runoff stations. The data files were transformed into tables using [R]. There were many variables that made observations possible. Altitude, Area, Runoff entries for many years, which ranged from years 1814-2016</i>
+<br>
+<br>
+<br>
+<h3 style="color:mediumseagreen;">Producing plots helped visualize the outline of the stations dynamics</h3>
+<p>Stations at higher altitudes have less area, while the lower altitude stations have much higher area</p>
+```{r}
+area_altitude <- runoff_stations[, list(area),by=altitude]
+ggplot(area_altitude, aes(x=altitude, y=area)) +
+  theme(panel.border=element_rect(color="pink", fill=NA, size=20)) +
+  geom_bar(stat="identity", width=10) 
+```
+<br>
+
+<br>
+<h3 style="color:gray;">We had 20 stations in total, each station had different time periods in which data was collected and available for use. This boxplot gives us a colorful display of when each of these stations data began being recorded:</h3>
+```{r}
+runoff_stations <- readRDS('./data/runoff_stations_raw.rds')
+stations_periods <- ggplot(data=runoff_day, aes(x=sname, y=date,color=sname))+
+  geom_boxplot()+
+  labs(subtitle="Plotting the time periods of the stations", x="Stations",y="Years")
+plot(stations_periods)
+
+```
+<br>
+<br>
+<h2>We see in plots we created that the runoff at the Rhine River stations has definitely changed over the last few decades in an increased rate</h2>
+```{r}
+runoff_day <- readRDS('./data/runoff_day.rds')
+runoff_year <- runoff_day[, .(value = mean(value)), by = .(year, sname)]
+
+ggplot(runoff_year[year > 1980], aes(x = year, y = value)) +
+  geom_line(col =  colset_4[1]) +
+  geom_point(col = colset_4[1]) + 
+  facet_wrap(~sname, scales = 'free') +
+  theme_minimal()
+```
+<p style="color:orange;">We used abbreviated names for the stations</p>
+<br>
+<br>
+<h2 style="color:white;">While exploring the data after preparation, we were able to present plots that helped better understand the data such as this plot, which shows the longitude and latitude, with altitude gradient for the stations points:</h2>
+```{r}
+runoff_stations <- readRDS('./data/runoff_stations_raw.rds')
+lati_longi <- runoff_stations[, .(lat,lon,altitude,sname)]
+la_lo <- ggplot(lati_longi, aes(x=lon, y=lat)) +
+  geom_point(aes(col=altitude),shape=16) +
+  geom_text(aes(label=sname,colour=altitude),check_overlap=TRUE) +
+  scale_color_viridis(option = "C") +
+  labs(subtitle="Station Altitudes and Geolocation", x="Longitude", y="Latitude")+
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=3))
+plot(la_lo)
+```
+<br>
+<br>
+<h1 style="color:slateblue;">The following plot was a great representation of the data, and helped draw the conclusion that Middelkoop had made an accurate hypothesis</h1>
+```{r}
+runoff_year <- readRDS('data/runoff_year.rds')
+key_stations <- c('DOMA', 'BASR', 'KOEL')
+runoff_year_key <- runoff_year[sname %in% key_stations]
+ggplot(runoff_year_key[year > 1950], aes(x = year, y = value_norm, col = sname)) +
+  geom_line() +
+  geom_point() + 
+  scale_color_manual(values = colset_4[c(1, 2, 4)]) +
+  xlab(label = "Year") +
+  ylab(label = "Runoff (m3/s)")
 ```
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
+
 
 ## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
+```{r pressure, echo=FALSE} 
+#echo false so no code is shown in output
 plot(pressure)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+</body>

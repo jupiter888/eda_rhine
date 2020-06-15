@@ -1,3 +1,4 @@
+source('./code/source_code.R')
 #ch5 Nav Q's
 #In our boxplot comparison of DOMA, BASR and KOEL we have used summer and winter period. Can you repeat it for annual and monthly data? Is there is some useful new information presented?
 year_thres <- 2000
@@ -40,6 +41,7 @@ ggplot(runoff_day_upd, aes(x=season, y=date, fill=season))+
   labs(title="Navigator Q2 Ch.5 ")
 #-------------------------------------------------------------------
 #NavQ3
+runoff_summary
 dt <- runoff_summary[, .(sname, area, category)]
 runoff_day_2010 <- runoff_day[year <= 2010, .(sname, mean_day=round(mean(value)), 0), by=sname]
 to_plot <- runoff_day_2010[dt, on='sname']

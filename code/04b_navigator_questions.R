@@ -4,7 +4,7 @@ median_runoff <- runoff_day[, .(median=median(value)), sname]
 runoff_stats <- median_runoff[runoff_stats, on='sname']
 tidy_runoff_stats  <- melt(runoff_stats, id.vars='sname')
 plotted_runoff_stats <- tidy_runoff_stats[variable!='sd_day']
-ggplot(to_plot, aes(x=sname, y=value, size=0.3)) + 
+ggplot(plotted_runoff_stats, aes(x=sname, y=value, size=0.3)) + 
   geom_point(aes(col=variable, shape=variable))
 #not sure how to get the plot to be less cramped like sardines
 

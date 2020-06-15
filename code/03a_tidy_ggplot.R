@@ -36,10 +36,10 @@ la_lo <- ggplot(lati_longi, aes(x=lon, y=lat)) +
   geom_point(aes(col=altitude),shape=16) +
   geom_text(aes(label=sname,colour=altitude),check_overlap=TRUE) +
   scale_color_viridis(option = "C") +
-  labs(subtitle="Graph for nav3", x="lon", y="lat")+
+  labs(subtitle="N3 Plot", x="lon", y="lat")+
   theme(panel.border = element_rect(colour = "black", fill=NA, size=1))
 plot(la_lo)
-ggsave("03a_tidy_ggplot2")
+#ggsave("03a_tidy_ggplot2")
 #nav3 Complete~
 
 #Nav4 Create a graph comparing the periods of available data at each station (assume that there are no missing values).
